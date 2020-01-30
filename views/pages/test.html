@@ -34,7 +34,7 @@ function startTime() {
     return response.json();
   })
   .then((myJson) => {
-    console.log(myJson);
+    streamTask = myJson
   });
 	for (i in streamTask){
 		x+= "<div class="+ card +  ">"
