@@ -5,17 +5,7 @@ const path = require('path')
 const app = express()
 const PORT = process.env.PORT || 3000;
 
-let streamTask = [{
-    "taskID" : "1",
-    "user" : "test",
-    "task" : "Zulky",
-    "platofrm": "twich"
-},{
-    "taskID" : "2",
-    "user" : "test",
-    "task" : "Zulky",
-    "platofrm": "twich"
-}]
+let streamTask = []
 
 var taskIDCounter = 1
 
@@ -52,7 +42,7 @@ app.get('/api/twitch/:user/:task',(req, res) =>{
     }
     taskIDCounter ++
     streamTask.push(addTask)
-    res.send("@" + user + " you task " + task + " has been added")
+    res.send("@" + user + " your task " + task + " has been added")
     console.log(streamTask)
 })
 
