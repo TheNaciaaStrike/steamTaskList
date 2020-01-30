@@ -42,7 +42,7 @@ app.get('/api/twitch/:user/:task',(req, res) =>{
     }
     taskIDCounter ++
     streamTask.push(addTask)
-    res.send("@" + user + " your task " + task + " has been added")
+    res.send("@" + user + " your task to do " + task + " has been added")
     console.log(streamTask)
 })
 
