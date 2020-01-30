@@ -1,0 +1,24 @@
+<header>
+    <header>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    </header>
+</header>
+
+<body>
+    <div class="container">
+        <hr>
+        <h1>List of books</h1>
+        <hr>
+        <div>
+            <% responce.forEach(function (responce) { %>
+            <div class="card">
+                <h4><%= responce.id %></h4>
+                <h6><%= responce.Vardas %></h6>
+                <h6><%= responce.Pavarde %></p>
+                <p><%= responce.Ikelimo_data %></p>
+            </div>
+            <% }) %>
+        </div>
+    </div>
+</body>
