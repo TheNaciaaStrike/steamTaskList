@@ -29,7 +29,7 @@ function startTime() {
 	var x = ""
 	var card = '"card"'
 	var streamTask = [] 
-	fetch('https://thenaciaastrike-streamelemts.herokuapp.com/streamJSON')
+	fetch('http://localhost:3000/streamJSON')
 	.then((response) => {
     return response.json();
   })

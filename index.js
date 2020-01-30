@@ -36,13 +36,13 @@ app.get('/stream', (req, res) =>{
 
 app.get('/streamJSON', (req, res) =>{
     res.json(streamTask)
-    console.log(streamTask)
 })
 
 app.get('/api/twitch/:user/:task',(req, res) =>{
-    const user = req.params.user
-    const task = req.params.task
-    task.repeat('!givetask ' , '')
+    var user = req.params.user
+    var task = req.params.task
+    console.log(task)
+    task = task.replace('!givetask ' , '')
     var addTask = []
     addTask = {
         "taskID" : taskIDCounter,
