@@ -27,7 +27,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/stream', (req, res) =>{
-    res.sendFile('pages/test.html', {streamTask})
+    res.sendFile('pages/test.html')
     console.log(streamTask)
 })
 
