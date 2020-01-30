@@ -42,6 +42,7 @@ app.get('/streamJSON', (req, res) =>{
 app.get('/api/twitch/:user/:task',(req, res) =>{
     const user = req.params.user
     const task = req.params.task
+    task.repeat('!givetask ' , '')
     var addTask = []
     addTask = {
         "taskID" : taskIDCounter,
@@ -51,7 +52,7 @@ app.get('/api/twitch/:user/:task',(req, res) =>{
     }
     taskIDCounter ++
     streamTask.push(addTask)
-    res.send("taskAdded")
+    res.send("@" + user + " you task " + task + " has been added")
     console.log(streamTask)
 })
 
