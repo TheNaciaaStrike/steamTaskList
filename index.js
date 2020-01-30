@@ -2,7 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 
 const app = express()
-const port = 3000
+const PORT = process.env.PORT || 3000;
 
 let streamTask = [{
     "taskID" : "1",
@@ -47,4 +47,4 @@ app.get('/api/twitch/:user/:task',(req, res) =>{
     console.log(streamTask)
 })
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`))
