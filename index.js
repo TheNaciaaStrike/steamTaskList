@@ -1,5 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const path = require('path')
 
 const app = express()
 const PORT = process.env.PORT || 3000;
@@ -27,7 +28,9 @@ app.get('/', function(req, res) {
 });
 
 app.get('/stream', (req, res) =>{
-    res.sendFile('pages/test.html')
+    res.sendFile('pages/test.html',{
+        root: path.join(__dirname, './views')
+    })
     console.log(streamTask)
 })
 
