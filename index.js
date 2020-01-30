@@ -27,7 +27,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/stream', (req, res) =>{
-    res.render('pages/twitch', {streamTask})
+    res.render('pages/test', {streamTask})
     console.log(streamTask)
 })
 

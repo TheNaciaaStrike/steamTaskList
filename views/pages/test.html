@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+	<div id="time" >
+		
+	</div>
+</body>
+
+
+
+<script type="text/javascript">
+
+window.onload = startInterval;
+function startInterval() {
+    setInterval("startTime();",1000);
+}
+
+function startTime() {
+	var x = ""
+	var card = '"card"'
+	var streamTask = [] 
+	fetch('https://thenaciaastrike-streamelemts.herokuapp.com/streamJSON')
+	.then((response) => {
+    return response.json();
+  })
+  .then((myJson) => {
+    console.log(myJson);
+  });
+	for (i in streamTask){
+		x+= "<div class="+ card +  ">"
+        x+= "<h4>" + streamTask[i].taskID + "</h4>"
+        x+= "<h6>" + streamTask[i].user + "</h6>"
+        x+= "<p>" + streamTask[i].task + "</p>"
+        x+= "<p>" + streamTask[i].platofrm + "</p>"
+        x+= "</div>"
+	}
+	
+    document.getElementById('time').innerHTML = x
+}
+</script>
