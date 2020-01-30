@@ -35,8 +35,7 @@ function startTime() {
   })
   .then((myJson) => {
     streamTask = myJson
-  });
-	for (i in streamTask){
+    for (i in streamTask){
 		x+= "<div class="+ card +  ">"
         x+= "<h4>" + streamTask[i].taskID + "</h4>"
         x+= "<h6>" + streamTask[i].user + "</h6>"
@@ -46,5 +45,6 @@ function startTime() {
 	}
 	
     document.getElementById('time').innerHTML = x
+  });
 }
 </script>
