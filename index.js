@@ -15,7 +15,7 @@ app.use(bodyParser.json())
 
 app.get('/', function(req, res) {
     res.render('pages/index');
-});
+})
 
 app.get('/stream', (req, res) =>{
     res.sendFile('pages/test.html',{
@@ -44,6 +44,13 @@ app.get('/api/twitch/:user/:task',(req, res) =>{
     streamTask.push(addTask)
     res.send("@" + user + " your task to do " + task + " has been added")
     console.log(streamTask)
+})
+
+app.get('/deleteTask/:id', (req, res) =>{
+    const deltionID = req.param.id
+    var as = deltionID - 1
+    streamTask.splice(as,1)
+    res.redirect(301, './stream')
 })
 
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`))

@@ -2,49 +2,53 @@
 
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 
 <body>
-	<div id="time" >
-		
-	</div>
+  <div class="container" style="padding-top: 10px;">
+    <div id="time" >
+
+    </div>
+  </div>
 </body>
-
-
 
 <script type="text/javascript">
 
-window.onload = startInterval;
-function startInterval() {
-    setInterval("startTime();",10000);
-}
+  window.onload = startInterval;
+  function startInterval() {
+    startTime()
+    setInterval("startTime();", 5000);
+  }
 
-function startTime() {
-	var x = ""
-	var card = '"card"'
-	var streamTask = [] 
-	fetch('https://thenaciaastrike-streamelemts.herokuapp.com/streamJSON')
-	.then((response) => {
-    return response.json();
-  })
-  .then((myJson) => {
-    streamTask = myJson
-    for (i in streamTask){
-		x+= "<div class="+ card +  ">"
-        x+= "<h4>" + streamTask[i].taskID + "</h4>"
-        x+= "<h6>" + streamTask[i].user + "</h6>"
-        x+= "<p>" + streamTask[i].task + "</p>"
-        x+= "<p>" + streamTask[i].platofrm + "</p>"
-        x+= "</div>"
-	}
-	
-    document.getElementById('time').innerHTML = x
-  });
-}
+  function startTime() {
+    var x = ""
+    var card = '"card"'
+    var streamTask = []
+    fetch('./streamJSON')
+      .then((response) => {
+        return response.json();
+      })
+      .then((myJson) => {
+        streamTask = myJson
+        for (i in streamTask) {
+          x += "<div class=" + card + ">"
+          x += "<li class="+'list-group-item'+"><h4 >Requested ID " + streamTask[i].taskID + "</h4></li>"
+          x += "<ul class="+ 'list-group list-group-flush' + ">"
+          x += "<li class="+'list-group-item'+"><h6> Requested By: " + streamTask[i].user + "</h6></li>"
+          x += "<li class="+'list-group-item'+"><p> Task Given: " + streamTask[i].task + "</p></li>"
+          x += "<li class="+'list-group-item'+"><p>" + streamTask[i].platofrm + "</p></li>"
+          x += "<li class="+'list-group-item'+"><a class="+'btn btn-primary'+" href="+'./deleteTask/'+streamTask[i].taskID+" role="+'button'+">Link</a></li>"
+          x += "</ul>"
+          x += "</div>"
+        }
+
+        document.getElementById('time').innerHTML = x
+      });
+  }
 </script>
