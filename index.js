@@ -50,7 +50,7 @@ app.get('/deleteTask/:id', (req, res) =>{
     const deltionID = req.param.id
     var as = deltionID - 1
     streamTask.splice(as,1)
-    res.redirect(301, './stream')
+    res.redirect(301, '../stream')
 })
 
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`))
