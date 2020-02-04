@@ -48,7 +48,7 @@ app.get('/api/twitch/:user/:task',(req, res) =>{
 
 app.get('/deleteTask/:id', (req, res) =>{
     const deltionID = req.param.id
-    var as = deltionID
+    var as = deltionID - 1
     streamTask.splice(as)
     res.redirect(301, '../stream')
 })
