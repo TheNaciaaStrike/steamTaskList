@@ -34,7 +34,7 @@ app.get('/stream', (req, res) =>{
 })
 
 app.get('/streamJSON',  (req, res) =>{
-    pool.query('SELECT * FROM "stream"."taskList" WHERE "Completed"=false ;', (err, rez) =>{
+    pool.query('SELECT * FROM stream."taskList" WHERE "Completed"=false ;', (err, rez) =>{
         if(err){
             throw err
         }
@@ -48,7 +48,7 @@ app.get('/api/twitch/:user/:task',(req, res) =>{
     var task = req.params.task
     task = task.replace('!givetask ' , '')
     var values = ['Twitch', user , task] 
-    const sql = 'INSERT INTO "stream"."taskList" ("Platform", "RequestedUser", "Task") VALUES ($1, $2, $3);'
+    const sql = 'INSERT INTO stream."taskList" ("Platform", "RequestedUser", "Task") VALUES ($1, $2, $3);'
     pool.query(sql, values, (err, rez) =>{
         if(err){
             throw  err
