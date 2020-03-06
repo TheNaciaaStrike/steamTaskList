@@ -64,7 +64,7 @@ app.get('/markasdone/:id',(req,res) =>{
             throw err
         }
         console.log(err, rez)
-        res.redirect(301, '../')
+        res.redirect(301, '../stream')
     })
     
 })
