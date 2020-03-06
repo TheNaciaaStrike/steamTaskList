@@ -38,12 +38,12 @@
         streamTask = myJson
         for (i in streamTask) {
           x += "<div class=" + card + ">"
-          x += "<li class="+'list-group-item'+"><h4 >Requested ID " + streamTask[i].taskID + "</h4></li>"
+          x += "<li class="+'list-group-item'+"><h4 >Requested ID " + streamTask[i].TaskID + "</h4></li>"
           x += "<ul class="+ 'list-group list-group-flush' + ">"
-          x += "<li class="+'list-group-item'+"><h6> Requested By: " + streamTask[i].user + "</h6></li>"
-          x += "<li class="+'list-group-item'+"><p> Task Given: " + streamTask[i].task + "</p></li>"
-          x += "<li class="+'list-group-item'+"><p>" + streamTask[i].platofrm + "</p></li>"
-          x += "<li class="+'list-group-item'+"><a class="+'btn btn-primary'+" href="+'./deleteTask/'+streamTask[i].taskID+" role="+'button'+">Link</a></li>"
+          x += "<li class="+'list-group-item'+"><h6> Requested By: " + streamTask[i].RequestedUser + "</h6></li>"
+          x += "<li class="+'list-group-item'+"><p> Task Given: " + streamTask[i].Task + "</p></li>"
+          x += "<li class="+'list-group-item'+"><p>" + streamTask[i].Platform + "</p></li>"
+          x += "<li class="+'list-group-item'+"><a class="+'btn btn-primary'+" href="+'./markasdone/'+streamTask[i].TaskID+" role="+'button'+">Mark As Done</a></li>"
           x += "</ul>"
           x += "</div>"
         }
