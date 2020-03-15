@@ -8,6 +8,11 @@
   <title>Document</title>
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    .hidden{
+      visibility: hidden;
+    }
+  </style>
 </head>
 
 <body>
@@ -29,8 +34,10 @@
   function startTime() {
     var x = ""
     var card = '"card"'
+    var lioptimize = "<li class="+'list-group-item'+">"
+    var hiddentextbox = "<input class="+'hidden'+" type="+'text'+" id="+'TaskID'+" name="+'TaskID'+" value="
     var streamTask = []
-    fetch('./streamJSON')
+    fetch('./stream/json')
       .then((response) => {
         return response.json();
       })
@@ -38,13 +45,11 @@
         streamTask = myJson
         for (i in streamTask) {
           x += "<div class=" + card + ">"
-          x += "<li class="+'list-group-item'+"><h4 >Requested ID " + streamTask[i].TaskID + "</h4></li>"
-          x += "<ul class="+ 'list-group list-group-flush' + ">"
-          x += "<li class="+'list-group-item'+"><h6> Requested By: " + streamTask[i].RequestedUser + "</h6></li>"
-          x += "<li class="+'list-group-item'+"><p> Task Given: " + streamTask[i].Task + "</p></li>"
-          x += "<li class="+'list-group-item'+"><p>" + streamTask[i].Platform + "</p></li>"
-          x += "<li class="+'list-group-item'+"><a class="+'btn btn-primary'+" href="+'./markasdone/'+streamTask[i].TaskID+" role="+'button'+">Mark As Done</a></li>"
-          x += "</ul>"
+          x += lioptimize+"<h4 >Requested ID " + streamTask[i].TaskID + "</h4></li>"
+          x += lioptimize+"<h6> Requested By: " + streamTask[i].RequestedUser + "</h6></li>"
+          x += lioptimize+"<p> Task Given: " + streamTask[i].Task + "</p></li>"
+          x += lioptimize+"<p>" + streamTask[i].Platform + "</p></li>"
+          x += lioptimize+"<form action="+'./stream'+" method="+'POST'+">"+ "<input type="+'submit'+" value=" + "MarkAsDone" + ">" + hiddentextbox + streamTask[i].TaskID +"></form> </li>"
           x += "</div>"
         }
 

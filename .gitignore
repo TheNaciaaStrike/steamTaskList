@@ -86,3 +86,7 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
+
+# Fake ssl certifcations
+server.cert
+server.key
