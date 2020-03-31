@@ -22,11 +22,15 @@ app.use('/stream', streamRouter)
 app.use('/api', apiRouter)
 
 //Create Server
-https.createServer({
-  //key: fs.readFileSync('server.key'),
-  //cert: fs.readFileSync('server.cert')
+
+
+app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`))
+
+/* https.createServer({
+  key: fs.readFileSync('server.key'),
+  cert: fs.readFileSync('server.cert')
 }, app)
 .listen(PORT, function () {
   console.log(`Example app listening on port ${PORT}! Go to https://localhost:${PORT}/`)
-})
+}) */
 
