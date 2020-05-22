@@ -11,8 +11,8 @@ require('./config/passport')(passport, db)
 require('./config/express')(app, passport, db.pool)
 require('./config/routes')(app, passport, db)
 
- const server = app.listen(port, () => {
-	console.log('Express app started on port ' + port)
+ const server = app.listen(PORT, () => {
+	console.log('Express app started on port ' + PORT)
 })
 
 server.on('close', () => {
