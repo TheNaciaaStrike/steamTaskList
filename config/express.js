@@ -24,7 +24,8 @@ module.exports = (app, passport, pools) => {
 		}),
 		secret: process.env.session_secret,
 		resave: false,
-		cookie: { maxAge: 14 * 24 * 60 * 60 * 1000 }
+        cookie: { maxAge: 14 * 24 * 60 * 60 * 1000,
+            secure:true }
 	}))
  
 	app.use(passport.initialize())
