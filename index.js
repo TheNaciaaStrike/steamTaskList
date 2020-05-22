@@ -3,7 +3,7 @@ const passport = require('passport')
 const db = require('./db')
 const https = require('https')
 
-const port = process.env.PORT || 3000
+const PORT = process.env.PORT || 3000
 const app = express()
 
 require('./config/passport')(passport, db)
