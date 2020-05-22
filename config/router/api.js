@@ -1,7 +1,7 @@
 var express = require('express')
 var router = express.Router()
-const db = require('../db')
-
+const db = require('../../db')
+ 
 function random(max, min){
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
@@ -12,7 +12,7 @@ router.get('/:platform/:user/:task', function(req, res, next){
     var task = req.params.task
     task = task.replace('!givetask ' , '')
     var values = [platform, user , task] 
-    const sql = 'INSERT INTO stream."taskList" ("Platform", "RequestedUser", "Task") VALUES ($1, $2, $3);'
+    const sql = 'INSERT INTO tasklist ("Platform", "RequestedUser", "Task") VALUES ($1, $2, $3);'
     db.query(sql, values, (err, rez) =>{
         if(err){
             throw  err
@@ -20,6 +20,34 @@ router.get('/:platform/:user/:task', function(req, res, next){
         res.send("@" + user + " your task to do " + task + " has been added")
     })
 })
+router.get('/taskCounter',async function(req, res, next){
+    db.query('SELECT * FROM tasklist WHERE "Completed"=$1 or "Completed"=$2', ['true','false'], (err,rez) =>{
+        if(err){
+            throw err
+        }
+        res.json(rez.rowCount)
+    })
+})
+router.get('/notDone',async function(req, res, next){
+    db.query('SELECT * FROM tasklist WHERE "Completed"=$1', ['false'], (err,rez) =>{
+        if(err){
+            throw err
+        }
+        res.json(rez.rowCount)
+    })
+})
+
+router.get('/json', function(req,res,next){
+    db.query('SELECT * FROM stream."taskList" WHERE "Completed"= $1 ;', ['false'], (err, rez) =>{
+        if(err){
+            throw err
+        }
+        json = rez.rows
+        res.send(json)
+    })
+})
+
+
 router.get('/olmdrop', function(req,res,next){
     var rareDrop=[
         {"name": "Twister bow", "weight": 2},
@@ -75,7 +103,6 @@ router.get('/olmdrop', function(req,res,next){
     var rng = random(30000,20000)
     var olmet = {"name": "Omlet"}
     var output=[]
-
     var a1=[]
     var a2=[]
     if(rng/8675 >= random(0,100)){
@@ -83,9 +110,8 @@ router.get('/olmdrop', function(req,res,next){
         if((rng/8675)*(a1[0].weight/69)*100 <= random(0,10000)){
             var o1={"name": a1[0].name}
             output.push(o1)
-            if(((rng/8675)*(1/53))*100 >= random(0,100)){
+            if(((rng/8675)*(1/53))*100 >= random(0,100))
                 res.send("PET DROP " + olmet.name + " " + output[0].name)
-            }
             res.send("RARE DROP " + output[0].name)
         }
     }
@@ -100,9 +126,8 @@ router.get('/olmdrop', function(req,res,next){
         var o2={"drop": random(1, a2[0].maxDrop),"name": a2[0].name}
         output.push(o1)
         output.push(o2)
-        if(((rng/8675)*(1/53))*100 >= random(0,10000)){
+        if(((rng/8675)*(1/53))*100 >= random(0,10000))
             res.send("PET DROP " + olmet.name + " " + output[0].drop + " " + output[0].name + " " + output[1].drop + " " + output[1].name)
-        }
         res.send(output[0].drop + " " + output[0].name + " " + output[1].drop + " " + output[1].name)
     }
 })

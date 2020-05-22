@@ -1,36 +1,31 @@
-//Boot componets
-require('dotenv').config()
-const fs = require('fs')
 const express = require('express')
-const bodyParser = require('body-parser')
+const passport = require('passport')
+const db = require('./db')
 const https = require('https')
-//Router Congfig
-var streamRouter = require('./routes/stream')
-var apiRouter = require('./routes/api')
-var indexRouter = require('./routes/main')
-//WebConfig
+
+const port = process.env.PORT || 3000
 const app = express()
-const PORT = process.env.PORT || 3000;
-//Web ViewEngine static folder and JSON settings
-app.set('view engine', 'ejs')
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json()) 
-app.use(express.static('views'))
-//Routers
-app.use('/', indexRouter)
-app.use('/stream', streamRouter)
-app.use('/api', apiRouter)
 
-//Create Server
+require('./config/passport')(passport, db)
+require('./config/express')(app, passport, db.pool)
+require('./config/routes')(app, passport, db)
 
+const server = app.listen(port, () => {
+	console.log('Express app started on port ' + port)
+})
 
-app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`))
+server.on('close', () => {
+	console.log('Closed express server')
+
+	db.pool.end(() => {
+		console.log('Shut down connection pool')
+	})
+})
 
 /* https.createServer({
-  key: fs.readFileSync('server.key'),
-  cert: fs.readFileSync('server.cert')
-}, app)
-.listen(PORT, function () {
-  console.log(`Example app listening on port ${PORT}! Go to https://localhost:${PORT}/`)
+    key: fs.readFileSync('server.key'),
+    cert: fs.readFileSync('server.cert')
+  }, app)
+  .listen(PORT, function () {
+    console.log(`Example app listening on port ${PORT}! Go to https://localhost:${PORT}/`)
 }) */
-

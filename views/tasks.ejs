@@ -5,9 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Blank Page - Brand</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
-    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../assets/fonts/fontawesome-all.min.css">
 </head>
 
 <body id="page-top">
@@ -15,33 +15,27 @@
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion" style="background-color: #0499c7;">
             <div class="container-fluid d-flex flex-column p-0">
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="index.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="blank.html"><i class="fas fa-window-maximize"></i><span>Task List</span></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="profile.html"><i class="fas fa-user"></i><span>Profile</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="./panel"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="./tasklist"><i class="fas fa-window-maximize"></i><span>Task List</span></a></li>
                 </ul>
             </div>
         </nav>
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content" style="background-color: #121212;">
-                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top" style="background-color: rgb(0,0,0)!important;">
-                    <div class="container-fluid">
-                        <ul class="nav navbar-nav flex-nowrap ml-auto">
-                            <li class="nav-item dropdown no-arrow" role="presentation">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">Valerie Luna</span><img class="border rounded-circle img-profile" src="assets/img/avatars/avatar1.jpeg"></a>
-                                    <div
-                                        class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu"><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Settings</a>
-                                        <a
-                                            class="dropdown-item" role="presentation" href="#"><i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Activity log</a>
-                                            <div class="dropdown-divider"></div><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a></div>
+                    <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top" style="background-color: rgb(0,0,0)!important;">
+                            <div class="container-fluid">
+                                <ul class="nav navbar-nav flex-nowrap ml-auto">
+                                    <li class="nav-item dropdown no-arrow" role="presentation">
+                                            <a class="dropdown-item" role="presentation" href="../logout"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a>
+                                        
+                            </li>
+                            </ul>
                     </div>
-                    </li>
-                    </ul>
-            </div>
-            </nav>
+                    </nav>
             <div class="container-fluid">
                 <h3 class="text-dark mb-1" style="color: rgb(255,255,255)!important;">Task List</h3>
             </div>
-            <div class="container">
+            <div class="container" id="time">
                 <div class="card" style="padding: 0px;background-color: rgba(255,255,255,0);margin: 0px;margin-top: 10px;margin-bottom: 10px;">
                     <div class="card-body" style="background-color: #000000;">
                         <ul class="list-group">
@@ -91,10 +85,45 @@
         </footer>
     </div>
     </div>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
-    <script src="assets/js/theme.js"></script>
+    <script src="../assets/js/theme.js"></script>
+    <script>
+        window.onload = startInterval;
+        function startInterval() {
+            startTime()
+            setInterval("startTime();", 5000);
+        }
+        function startTime() {
+            var x = ""
+var card = '"card"'
+var lioptimize = "<li class="+'list-group-item'+" style="+">"
+var style = "style="+"padding: 0px;background-color: rgba(255,255,255,0);margin: 0px;margin-top: 10px;margin-bottom: 10px;"
+var hiddentextbox = "<input hidden class="+'hidden'+" type="+'text'+" id="+'TaskID'+" name="+'TaskID'+" value="
+var streamTask = []
+fetch('../../api/json')
+	.then((response) => {
+        return response.json();
+    })
+    .then((myJson) => {
+        streamTask = myJson
+        for (i in streamTask) {
+            x+=	"<div class="+'"card"'+" style="+'"padding: 0px;background-color: rgba(255,255,255,0);margin: 0px;margin-top: 10px;margin-bottom: 10px;"'+">"
+			x+=		"<div class="+'"card-body"'+" style="+'"background-color: #000000;"'+">"
+			x+=			"<ul class="+'"list-group"'+">"
+			x+=				"<li class="+'"list-group-item"'+" style="+'"background-color: #121212;"'+"><span style="+'"color: rgb(255,255,255);"'+">ID "+ streamTask[i].TaskID+"</span></li>"
+			x+=				"<li class="+'"list-group-item"'+" style="+'"background-color: #232323;"'+"><span style="+'"color: rgb(255,255,255);"'+">Platform "+ streamTask[i].Platform+"</span></li>"
+			x+=				"<li class="+'"list-group-item"'+" style="+'"background-color: #121212;"'+"><span style="+'"color: rgb(255,255,255);"'+">Requested by "+ streamTask[i].RequestedUser+"</span></li>"
+			x+=				"<li class="+'"list-group-item"'+" style="+'"background-color: #232323;"'+"><span style="+'"color: rgb(255,255,255);"'+">"+streamTask[i].Task+"</span></li>"
+            x+=             "<li class="+'"list-group-item"'+" style="+'"background-color: #121212;"'+">"+"<form action="+'./stream'+" method="+'POST'+">"+ "<input class="+'"btn btn-success text-center d-flex flex-grow-0 flex-shrink-1 flex-fill"'+ " type="+'submit'+" value=" + "MarkAsDone" + ">" + hiddentextbox + streamTask[i].TaskID +"></form> </li>"
+            x += "</div></div>"
+        }
+          
+        document.getElementById('time').innerHTML = x
+	});
+        }
+    </script>
 </body>
 
 </html>
