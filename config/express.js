@@ -26,7 +26,7 @@ module.exports = (app, passport, pools) => {
 		resave: false,
         cookie: { maxAge: 14 * 24 * 60 * 60 * 1000,
             secure:true,
-            httpOnly: false}
+            httpOnly: true}
 	}))
  
 	app.use(passport.initialize())
