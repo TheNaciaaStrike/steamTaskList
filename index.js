@@ -1,15 +1,17 @@
 const express = require('express')
 const passport = require('passport')
 const db = require('./db')
+const https = require('https')
+const fs = require('fs')
 
-const port = process.env.PORT || 3000
+const PORT = process.env.PORT || 3000
 const app = express()
 
 require('./config/passport')(passport, db)
 require('./config/express')(app, passport, db.pool)
 require('./config/routes')(app, passport, db)
 
-const server = app.listen(port, () => {
+/* const server = app.listen(port, () => {
 	console.log('Express app started on port ' + port)
 })
 
@@ -19,12 +21,12 @@ server.on('close', () => {
 	db.pool.end(() => {
 		console.log('Shut down connection pool')
 	})
-})
+}) */
 
-/* https.createServer({
+https.createServer({
   key: fs.readFileSync('server.key'),
   cert: fs.readFileSync('server.cert')
 }, app)
 .listen(PORT, function () {
   console.log(`Example app listening on port ${PORT}! Go to https://localhost:${PORT}/`)
-}) */
+})
