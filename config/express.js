@@ -1,4 +1,5 @@
 require('dotenv').config()
+const sslRedirect = require('heroku-ssl-redirect');
 const path = require('path')
 const bodyParser = require('body-parser')
 const express = require('express')
