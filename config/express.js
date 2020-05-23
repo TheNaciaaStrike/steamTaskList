@@ -25,7 +25,7 @@ module.exports = (app, passport, pools) => {
 		}),
 		secret: process.env.session_secret,
 		resave: false,
-		proxy: ture,
+		proxy: true,
         cookie: { maxAge: 14 * 24 * 60 * 60 * 1000,
             secure:true,
             httpOnly: false}
