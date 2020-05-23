@@ -35,7 +35,7 @@ module.exports = (app, passport, db) => {
         var SALT = await aesEncrypt.genSalt(password)
         var HASH = await aesEncrypt.genHash(SALT.salt,password)
         HASH = HASH.hash
-        db.query('INSERT INTO "users" ("username", "password", "type") VALUES ($1,$2,$3)', [userName,HASH,'admin'], (err, result) => {
+        db.query('INSERT INTO "users" ("username", "password", "type") VALUES ($1,$2,$3)', [userName,HASH,'user'], (err, result) => {
 			if(err) {
 				changeStatus('','USERNAME WAS TAKEN :)')
                 res.render('register.ejs',webRepeat)
