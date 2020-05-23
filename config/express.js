@@ -28,7 +28,8 @@ module.exports = (app, passport, pools) => {
             //secure:true,
             httpOnly: false}
 	}))
- 
+
+	app.use(sslRedirect())
 	app.use(passport.initialize())
 	app.use(passport.session()) 
 
