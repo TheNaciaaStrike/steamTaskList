@@ -116,7 +116,7 @@ fetch('../../api/json')
 			x+=				"<li class="+'"list-group-item"'+" style="+'"background-color: #232323;"'+"><span style="+'"color: rgb(255,255,255);"'+">Platform "+ streamTask[i].Platform+"</span></li>"
 			x+=				"<li class="+'"list-group-item"'+" style="+'"background-color: #121212;"'+"><span style="+'"color: rgb(255,255,255);"'+">Requested by "+ streamTask[i].RequestedUser+"</span></li>"
 			x+=				"<li class="+'"list-group-item"'+" style="+'"background-color: #232323;"'+"><span style="+'"color: rgb(255,255,255);"'+">"+streamTask[i].Task+"</span></li>"
-            x+=             "<li class="+'"list-group-item"'+" style="+'"background-color: #121212;"'+">"+"<form action="+'./stream'+" method="+'POST'+">"+ "<input class="+'"btn btn-success text-center d-flex flex-grow-0 flex-shrink-1 flex-fill"'+ " type="+'submit'+" value=" + "MarkAsDone" + ">" + hiddentextbox + streamTask[i].TaskID +"></form> </li>"
+            x+=             "<li class="+'"list-group-item"'+" style="+'"background-color: #121212;"'+">"+"<form action="+'../../api/markasdone'+" method="+'POST'+">"+ "<input class="+'"btn btn-success text-center d-flex flex-grow-0 flex-shrink-1 flex-fill"'+ " type="+'submit'+" value=" + "MarkAsDone" + ">" + hiddentextbox + streamTask[i].TaskID +"></form> </li>"
             x += "</div></div>"
         }
           

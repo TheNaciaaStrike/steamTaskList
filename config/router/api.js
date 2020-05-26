@@ -131,4 +131,17 @@ router.get('/olmdrop', function(req,res,next){
         res.send(output[0].drop + " " + output[0].name + " " + output[1].drop + " " + output[1].name)
     }
 })
+
+router.post('/markasdone', function(req, res, next){
+    const sql = 'UPDATE stream."taskList" SET  "Completed"=true WHERE "TaskID"= $1;'
+    var variables = [req.body.TaskID]
+    db.query(sql,variables,(err,rez)=>{
+        if(err){
+            throw err
+        }
+        res.sendFile('pages/test.html',{
+            root: path.join(__dirname, '../views')
+        })
+    })
+}) 
 module.exports = router
