@@ -38,7 +38,7 @@ router.get('/notDone',async function(req, res, next){
 })
 
 router.get('/json', function(req,res,next){
-    db.query('SELECT * FROM stream."taskList" WHERE "Completed"= $1 ;', ['false'], (err, rez) =>{
+    db.query('SELECT * FROM taskList WHERE "Completed"= $1 ;', ['false'], (err, rez) =>{
         if(err){
             throw err
         }
@@ -133,7 +133,7 @@ router.get('/olmdrop', function(req,res,next){
 })
 
 router.post('/markasdone', function(req, res, next){
-    const sql = 'UPDATE stream."taskList" SET  "Completed"=true WHERE "TaskID"= $1;'
+    const sql = 'UPDATE taskList SET  "Completed"=true WHERE "TaskID"= $1;'
     var variables = [req.body.TaskID]
     db.query(sql,variables,(err,rez)=>{
         if(err){
