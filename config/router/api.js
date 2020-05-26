@@ -139,9 +139,7 @@ router.post('/markasdone', function(req, res, next){
         if(err){
             throw err
         }
-        res.sendFile('pages/test.html',{
-            root: path.join(__dirname, '../views')
-        })
+        res.redirect('../admin/tasklist')
     })
 }) 
 module.exports = router
