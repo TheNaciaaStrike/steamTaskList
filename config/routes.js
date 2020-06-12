@@ -61,8 +61,20 @@ module.exports = (app, passport, db) => {
 	app.post('/admin/login', passport.authenticate('local', { failureRedirect: '/admin/login', successRedirect: '/admin/panel', }), admin.login)
     app.get('/admin/panel', requiresAdmin, admin.renderPanel)
     app.get('/admin/tasklist',requiresAdmin,admin.renderTasks)
+
+    app.post('admin/markasdone', requiresAdmin, function(req, res, next){
+        const sql = 'UPDATE taskList SET  "Completed"=true WHERE "TaskID"= $1;'
+        console.log(req.body)
+        var variables = [req.body.TaskID]
+            db.query(sql,variables,(err,rez)=>{
+                if(err){
+                    throw err
+                }
+                res.redirect('../admin/tasklist')
+            })
+        })
     
 	app.use(function (req, res) {
-		res.status(404).render('404.ejs')
+		res.status(404).render('4XX.ejs',{StatusCode: 404,})
 	})
 }

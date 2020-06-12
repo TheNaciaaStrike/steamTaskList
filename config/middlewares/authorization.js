@@ -8,6 +8,6 @@ module.exports = {
 	requiresAdmin: (req, res, next) => {
 		if (req.user && req.user.type === 'admin') return next()
 
-		res.sendStatus(401)
+		res.status(401).render('4XX.ejs',{StatusCode: 401})
 	}
 }

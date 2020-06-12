@@ -1,11 +1,14 @@
 var express = require('express')
 var router = express.Router()
 const db = require('../../db')
+
  
 function random(max, min){
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
+
+//Task Creator from Bot API
 router.get('/:platform/:user/:task', function(req, res, next){
     var user = req.params.user 
     var platform = req.params.platform 
@@ -20,6 +23,8 @@ router.get('/:platform/:user/:task', function(req, res, next){
         res.send("@" + user + " your task to do " + task + " has been added")
     })
 })
+
+//Return JSON for DASH
 router.get('/taskCounter',async function(req, res, next){
     db.query('SELECT * FROM tasklist WHERE "Completed"=$1 or "Completed"=$2', ['true','false'], (err,rez) =>{
         if(err){
@@ -28,6 +33,8 @@ router.get('/taskCounter',async function(req, res, next){
         res.json(rez.rowCount)
     })
 })
+
+//Return JSON for DASH
 router.get('/notDone',async function(req, res, next){
     db.query('SELECT * FROM tasklist WHERE "Completed"=$1', ['false'], (err,rez) =>{
         if(err){
@@ -37,6 +44,7 @@ router.get('/notDone',async function(req, res, next){
     })
 })
 
+//Return JSON for taskList
 router.get('/json', function(req,res,next){
     db.query('SELECT * FROM taskList WHERE "Completed"= $1 ;', ['false'], (err, rez) =>{
         if(err){
@@ -47,7 +55,7 @@ router.get('/json', function(req,res,next){
     })
 })
 
-
+//Return Drops for chat
 router.get('/olmdrop', function(req,res,next){
     var rareDrop=[
         {"name": "Twister bow", "weight": 2},
@@ -130,16 +138,5 @@ router.get('/olmdrop', function(req,res,next){
             res.send("PET DROP " + olmet.name + " " + output[0].drop + " " + output[0].name + " " + output[1].drop + " " + output[1].name)
         res.send(output[0].drop + " " + output[0].name + " " + output[1].drop + " " + output[1].name)
     }
-})
-
-router.post('/markasdone', function(req, res, next){
-    const sql = 'UPDATE taskList SET  "Completed"=true WHERE "TaskID"= $1;'
-    var variables = [req.body.TaskID]
-    db.query(sql,variables,(err,rez)=>{
-        if(err){
-            throw err
-        }
-        res.redirect('../admin/tasklist')
-    })
 }) 
 module.exports = router
