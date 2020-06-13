@@ -46,7 +46,7 @@ client.on('ready', () => {
 			if(err){
 				throw err
 			}
-			console.log(rez.rows.length)
+			//console.log(rez.rows.length)
 			var Fieldz = []
 			if(rez.rows.length>25){
 				for(i=0; i<25; i++){
@@ -60,7 +60,7 @@ client.on('ready', () => {
 					Fieldz.push(temp)
 				}
 			}
-			console.log(Fieldz)
+			//console.log(Fieldz)
 			var embed = new MessageEmbed()
 			.setTitle('Task List')
 			.setDescription('Tasks that sill need to be done')
