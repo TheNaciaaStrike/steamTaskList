@@ -1,9 +1,9 @@
 # steamTaskList
 SoftWare for taskList witch could be integrated with stream
 
-##Usage
+## Usage
                     
-###Enviroment Table
+### Enviroment Table
 Enviroment table setup for database login and discord bot
                     
 Enviroment  | Value
@@ -15,7 +15,7 @@ dbPort | Port for Database host  (E.g.: 5432)
 idleTimeoutMillis  | Time out for Database connection ( E.g.: 50)
 dcBot | Discord bot Token  (E.g.:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)
 
-###Tables and definitions
+### Tables and definitions
 |  Database Table | Desciption  |
 | ------------ | ------------ |
 |  tasklist |  Table to store Tasks  |
